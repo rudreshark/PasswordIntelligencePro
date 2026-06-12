@@ -72,9 +72,9 @@ export function TelemetryModule(props: {
         />
       </div>
 
-      <Card className="bg-card/60 backdrop-blur border-border p-4">
+      <Card className="glass-popup border-border p-4 interactive-popup">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">
+          <h3 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground glow-text">
             Telemetry Radar
           </h3>
           <Badge variant="outline" className="font-mono text-[10px]">

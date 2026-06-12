@@ -198,14 +198,129 @@
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: var(--gradient-primary);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s ease;
 }
-.card-glow:hover::before { opacity: 1; }
+.card-glow:hover::before {
+  opacity: 0.6;
+}
+
+/* Advanced Hover & Popup Designs */
+.premium-card {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  background: var(--card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px -15px oklch(0.58 0.2 240 / 0.25), 
+              0 0 20px -5px oklch(0.58 0.2 240 / 0.15);
+}
+
+.premium-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.premium-card:hover::after {
+  left: 100%;
+}
+
+.popup-animation {
+  animation: popup 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popup {
+  0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.glow-text {
+  text-shadow: 0 0 12px oklch(0.58 0.2 240 / 0.5);
+}
+
+.glass-popup {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.dark .glass-popup {
+  background: rgba(32, 32, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-hover-effect {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: var(--primary);
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.btn-hover-effect:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.btn-hover-effect:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px var(--primary);
+}
+
+.neon-border {
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 10px var(--primary), inset 0 0 5px var(--primary);
+  animation: neon-pulse 2s infinite alternate;
+}
+
+@keyframes neon-pulse {
+  from { box-shadow: 0 0 5px var(--primary), inset 0 0 2px var(--primary); }
+  to { box-shadow: 0 0 15px var(--primary), inset 0 0 8px var(--primary); }
+}
+
+.interactive-popup {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.interactive-popup:hover {
+  transform: scale(1.05);
+}
 
 /* Button animations */
 .btn-animate {

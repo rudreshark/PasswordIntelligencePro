@@ -83,10 +83,10 @@ export function VaultModule({ breachEnabled }: { breachEnabled: boolean }) {
 
   return (
     <div className="space-y-6">
-      <Card className="bg-card/60 backdrop-blur border-border p-5 hover-lift card-glow">
+      <Card className="glass-popup border-border p-5 hover-lift card-glow premium-card">
         <div className="flex items-center gap-2 mb-4">
-          <Database className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-semibold tracking-wide uppercase">Local Vault</h3>
+          <Database className="h-4 w-4 text-primary glow-text" />
+          <h3 className="text-sm font-semibold tracking-wide uppercase glow-text">Local Vault</h3>
           <Badge variant="outline" className="ml-auto font-mono text-[10px]">
             LocalStorage
           </Badge>
