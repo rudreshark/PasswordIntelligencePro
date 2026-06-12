@@ -1,12 +1,11 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy PassIntell Pro to GitHub Pages
+# Deploy PassIntell Pro to GitHub Pages automatically!
+name: Deploy PassIntell Pro
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes to main branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # Runs on manual trigger (you can run it from Actions tab)
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -15,37 +14,30 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # Build job
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Set up Node
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
-          cache-dependency-path: "client/package-lock.json"
-      
+          cache-dependency-path: client/package-lock.json
+
       - name: Install dependencies
-        working-directory: "client"
-        run: npm install
+        run: cd client && npm ci
 
       - name: Build
-        working-directory: "client"
-        run: npm run build
+        run: cd client && npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -53,9 +45,16 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the dist folder from the client directory
-          path: "client/dist"
+          path: ./client/dist
 
+  # Deploy job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
