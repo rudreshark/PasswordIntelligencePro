@@ -6,6 +6,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), tsconfigPaths()],
+  base: "/PasswordIntelligencePro/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
