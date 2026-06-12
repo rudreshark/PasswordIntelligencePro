@@ -29,7 +29,17 @@ npm run dev  # in client/
 
 ## 🌐 Deploying to Production
 
-### Option 1: Netlify (Easiest for Frontend Only)
+### 🌟 Option 1: GitHub Pages (Easiest & Free!)
+1. Go to your repo: https://github.com/rudreshark/PasswordIntelligencePro
+2. Click **Settings** -> **Pages**
+3. Under **Build and deployment** -> **Source**: Select **GitHub Actions**
+4. GitHub will show a suggested workflow for Vite, click **Configure**
+5. Update the workflow to use **Base directory: `client/`**
+6. **Commit the workflow file**!
+7. GitHub will automatically build and deploy your PassIntell Pro at: `https://rudreshark.github.io/PasswordIntelligencePro/` 🚀
+   (It may take a minute or two for the first deploy!)
+
+### Option 2: Netlify
 1. Go to https://app.netlify.com
 2. Connect your GitHub repo `https://github.com/rudreshark/PasswordIntelligencePro`
 3. Set **Base directory**: `client/`
@@ -40,14 +50,14 @@ npm run dev  # in client/
    - `VITE_SUPABASE_ANON_KEY`: Your Supabase anon key
 7. Deploy! 🚀
 
-### Option 2: Vercel
+### Option 3: Vercel
 1. Go to https://vercel.com
 2. Import your GitHub repo
 3. Override **Root Directory** to `client/`
 4. Add the same environment variables as above
 5. Deploy! 🚀
 
-### Option 3: Full-Stack (Client + Express Server)
+### Option 4: Full-Stack (Client + Express Server)
 For full server hosting (e.g., on Render, Railway, or AWS):
 - Deploy `server/` as a Node.js app on your favorite platform
 - Deploy `client/` as static assets (using Vercel/Netlify, or serve via Express)
